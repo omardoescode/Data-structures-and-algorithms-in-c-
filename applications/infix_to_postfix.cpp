@@ -6,9 +6,7 @@
 int main() {
   std::string expression, output;
   getline(std::cin, expression);
-  std::map<char, int> ops = {
-      {'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'(', 3}, {')', 3},
-  };
+  std::map<char, int> ops = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}};
 
   stack<char> st;
   int current_number = 0;
