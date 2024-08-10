@@ -6,7 +6,12 @@ template <typename Object> class stack {
 public:
   stack() = default;
 
-  stack(const stack &rhs) { copy_stack(rhs); }
+  stack(const stack &rhs) {
+    _elems.reserve(rhs.size());
+    for (auto &value : rhs._elems) {
+      _elems.push_back(value);
+    }
+  }
 
   stack &operator=(const stack &rhs) {
     auto copy = rhs;
@@ -36,14 +41,4 @@ public:
 
 private:
   vector<Object> _elems;
-
-  void copy_stack(const stack &rhs) {
-    if (rhs.size() == 0)
-      return;
-
-    Object top = rhs.top();
-    rhs.pop_top();
-    copy_stack(rhs);
-    push_top(top);
-  }
 };
