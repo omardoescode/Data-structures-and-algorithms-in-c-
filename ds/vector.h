@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Error.h"
 #include <algorithm>
 #include <initializer_list>
