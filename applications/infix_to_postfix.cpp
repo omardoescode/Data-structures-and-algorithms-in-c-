@@ -1,4 +1,4 @@
-#include "../ds/stack.h"
+#include "../ds/linear/stack.h"
 #include <algorithm>
 #include <iostream>
 #include <map>
