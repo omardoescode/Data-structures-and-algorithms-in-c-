@@ -1,8 +1,10 @@
+#include "../Error.h"
 #include <algorithm>
 #include <initializer_list>
 #include <iostream>
 #include <utility>
 
+// WARN: no type checking
 template <typename Object> class vector {
 public:
   explicit vector(size_t init_size = 0)
@@ -85,6 +87,27 @@ public:
   }
 
   void pop_back() { _size--; }
+
+  Object front() {
+    if (size() == 0)
+      throw Error("Vector is empty");
+    return _objects[0];
+  }
+  Object &front() const {
+    if (size() == 0)
+      throw Error("Vector is empty");
+    return _objects[0];
+  }
+  Object back() {
+    if (size() == 0)
+      throw Error("Vector is empty");
+    return _objects[size() - 1];
+  }
+  Object &back() const {
+    if (size() == 0)
+      throw Error("Vector is empty");
+    return _objects[size() - 1];
+  }
 
   typedef Object *iterator;
   typedef const Object *const_iterator;
