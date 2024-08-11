@@ -1,6 +1,8 @@
-#include "../Error.h"
+#pragma once
+#include "../../Error.h"
 #include <cstddef>
 #include <exception>
+#include <initializer_list>
 #include <utility>
 
 // TODO: Create the exceptions
@@ -60,8 +62,7 @@ public:
         : current{p}, _list{&lst} {}
 
     void assert_is_valid() const {
-      if (_list == nullptr || current == nullptr || current == _list->_head ||
-          current == _list->_tail) {
+      if (_list == nullptr || current == nullptr || current == _list->_head) {
         throw Error("Iterator out of bound");
       }
     }
@@ -104,6 +105,13 @@ public:
     clear();
     delete _head;
     delete _tail;
+  }
+
+  list(const std::initializer_list<Object> &elems) {
+    init();
+
+    for (const auto &val : elems)
+      push_back(val);
   }
 
   list(const list &rhs) {
