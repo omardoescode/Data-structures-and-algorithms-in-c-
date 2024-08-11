@@ -2,8 +2,13 @@
 
 #include "../../Error.h"
 #include <cstddef>
-#include <iostream>
 #include <utility>
+
+/*
+ * Invariants for impelementation:
+ *   _back: stores the index at which the next element would be pushed
+ *   _front: stores the index of the front element
+ */
 
 template <typename Object> class queue {
 public:
@@ -56,14 +61,13 @@ public:
     _arr = nullptr;
   }
 
-  const std::size_t size() const { return _size; }
-  const std::size_t capacity() const { return _capacity; }
-  const bool empty() const { return _size == 0; }
+  std::size_t size() const { return _size; }
+  std::size_t capacity() const { return _capacity; }
+  bool empty() const { return _size == 0; }
 
-  const Object &front() { return _arr[_front]; }
+  const Object &front() const { return _arr[_front]; }
 
   void push(const Object &value) {
-    std::cout << "pushing " << value << std::endl;
     if (_size == _capacity) {
       resize();
       push(value);
@@ -120,7 +124,7 @@ private:
 private:
   Object *_arr;
   std::size_t _front;
-  std::size_t _back; // for the element where the new one would be pushed
+  std::size_t _back;
   std::size_t _size, _capacity;
 
   static constexpr std::size_t SPARE_CAPACITY = 20;
