@@ -1,5 +1,6 @@
 #pragma once
 
+#include <numeric>
 #include <vector>
 class DisjSets {
 public:
@@ -18,6 +19,11 @@ public:
       return s[x] = find(s[x]); // path compression
   }
   void unionSets(int root1, int root2) { s[root2] = root1; }
+
+  int groups() const {
+    return std::accumulate(s.begin(), s.end(), 0,
+                           [](int &a, int &b) { return a + (b == -1); });
+  }
 
 private:
   std::vector<int> s;
